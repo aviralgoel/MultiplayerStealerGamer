@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-public class NetworkManager : MonoBehaviour
+public class NetworkManager : MonoBehaviourPunCallbacks
 {
     // Let's have this Script as a singleton, so that we can refernece it from anywhere 
     // in the project
@@ -53,6 +53,25 @@ public class NetworkManager : MonoBehaviour
         //Let photon change the scene, instead of unity, so that 
         //It can make sure, nothing happens on the server while scene is loading
         PhotonNetwork.LoadLevel(sceneName);
+    }
+
+    /// <summary>
+    /// Called when the client is connected to the Master Server and ready for matchmaking and other tasks.
+    /// Displays a Debug.Log message, if success.
+    /// </summary>    
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("Client Connected to Master Server!");
+        CreateRoom("testroom");
+    }
+
+    /// <summary>
+    /// Called when the client successfully creates a room and joins.
+    /// Displays a Debug.Log message with room name, if success.
+    /// </summary> 
+    public override void OnCreatedRoom()
+    {
+        Debug.Log("Room Created: " + PhotonNetwork.CurrentRoom.Name);
     }
 
     // Update is called once per frame
