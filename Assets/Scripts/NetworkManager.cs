@@ -48,6 +48,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     //Function to Change the Scene in the project, used specifically to take player 
     //from lobby <-> room <-> game
+    //Tagging it as PUNRPC, because this function must be called on every player's system
+    //when the host starts the game
+    [PunRPC]
     public void ChangeScene(string sceneName)
     {
         //Let photon change the scene, instead of unity, so that 
@@ -59,20 +62,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     /// Called when the client is connected to the Master Server and ready for matchmaking and other tasks.
     /// Displays a Debug.Log message, if success.
     /// </summary>    
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log("Client Connected to Master Server!");
-        CreateRoom("testroom");
-    }
+    //public override void OnConnectedToMaster()
+    //{
+    //    Debug.Log("Client Connected to Master Server!");
+    //    CreateRoom("testroom");
+    //}
 
-    /// <summary>
-    /// Called when the client successfully creates a room and joins.
-    /// Displays a Debug.Log message with room name, if success.
-    /// </summary> 
-    public override void OnCreatedRoom()
-    {
-        Debug.Log("Room Created: " + PhotonNetwork.CurrentRoom.Name);
-    }
+    ///// <summary>
+    ///// Called when the client successfully creates a room and joins.
+    ///// Displays a Debug.Log message with room name, if success.
+    ///// </summary> 
+    //public override void OnCreatedRoom()
+    //{
+    //    Debug.Log("Room Created: " + PhotonNetwork.CurrentRoom.Name);
+    //}
 
     // Update is called once per frame
     void Update()
