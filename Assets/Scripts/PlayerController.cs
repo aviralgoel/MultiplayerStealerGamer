@@ -5,7 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     [HideInInspector]
     //player ID to identify the player in the multiplayer game
@@ -27,8 +27,17 @@ public class PlayerController : MonoBehaviour
     //ray shot by player towards the groud, to check isGrounded?
     private float rayLength = 0.7f;
 
+    [PunRPC]
+    public void Initialize(Player player)
+    {
+        photonPlayer = player;
+        id = player.ActorNumber;
 
+        GameManager.instance.players[id - 1] = this; 
 
+        if (!photonView.IsMine)
+            rb.isKinematic = true;
+    }
     private void Update()
     {
         Move();

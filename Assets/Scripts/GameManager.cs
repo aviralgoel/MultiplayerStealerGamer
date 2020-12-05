@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         // if everyone joined the game scene, then spawn all.
         if(playersInGame == PhotonNetwork.PlayerList.Length)
         {
-            SpawnThePlayer()
+            SpawnThePlayer();
         }
     }
 
@@ -65,12 +65,11 @@ public class GameManager : MonoBehaviourPunCallbacks
                                    spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.identity);
 
         PlayerController playerScript = playerObj.GetComponent<PlayerController>();
+        
+        // initialize the player
+        playerScript.photonView.RPC("Initialize", RpcTarget.All, PhotonNetwork.LocalPlayer);
 
     }
-
-
-
-
 
 
 
