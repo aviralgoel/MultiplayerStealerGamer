@@ -72,6 +72,48 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
 
+    /// <summary>
+    /// Accessor functions, that will return the PlayerController script of the player whose player ID or whose GameObject 
+    /// is passed.
+    /// </summary>
+    public PlayerController GetPlayer(int playerId)
+    {
+        return players.First(x => x.id == playerId);
+    }
+
+    public PlayerController GetPlayer(GameObject playerObject)
+    {
+        return players.First(x => x.gameObject == playerObject);
+    }
+
+
+    // called when a player hits the hatted player
+    [PunRPC]
+    public void GiveHat(int playerID, bool initialGive)
+    {
+        //Remove the hat from currently hatted player
+        if(!initialGive)
+        {
+            GetPlayer(playerWithHatID).SetHat(false);
+        }
+
+        //Give Hat to the new player, also update the ID of the currentHattedPlayer
+        playerWithHatID = playerID;
+        GetPlayer(playerID).SetHat(true);
+        hatPickupTime = Time.time;
+    }
+
+    public bool CanGetHat()
+    {
+        if (Time.time > hatPickupTime + invincibilityDuration)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
+
 
 
 
