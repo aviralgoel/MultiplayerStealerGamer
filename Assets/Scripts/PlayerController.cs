@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 if(GameManager.instance.CanGetHat())
                 {
                     //Give us the hat
-                    GameManager.instance.photonView.RPC("SetHat", RpcTarget.All, id, false);    
+                    GameManager.instance.photonView.RPC("GiveHat", RpcTarget.All, id, false);    
                 }
             }
         }
