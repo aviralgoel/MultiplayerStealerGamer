@@ -112,7 +112,21 @@ public class GameManager : MonoBehaviourPunCallbacks
         else
             return false;
     }
+    [PunRPC]
+    public void WinTheGame(int _playerid)
+    {
+        hasGameEnded = true;
+        PlayerController player = GetPlayer(_playerid);
+        // set ui who won
+        //go back to menu
+        Invoke("GoToMenu", 3.0f);
+    }
 
+    public void GoToMenu()
+    {
+        PhotonNetwork.LeaveRoom();
+        NetworkManager.instance.ChangeScene("Menu");
+    }
 
 
 
