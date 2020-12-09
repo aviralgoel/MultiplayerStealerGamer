@@ -5,7 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 
 
-public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     [HideInInspector]
     //player ID to identify the player in the multiplayer game
@@ -45,33 +45,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             rb.isKinematic = true;
     }
     private void Update()
-    {   
-        //if the instance of this script is running on the master client
-        //then we must keep track of hat times for the game
-        if(PhotonNetwork.IsMasterClient)
+    {
+        Move();
+        if(Input.GetKeyDown(KeyCode.Space))
         {
-            if(currentHatTime >= GameManager.instance.timeToWin && !GameManager.instance.hasGameEnded)
-            {
-                GameManager.instance.hasGameEnded = true;
-                GameManager.instance.photonView.RPC("WinTheGame", RpcTarget.All, id);
-            }
+            TryJump();
         }
-
-        // if the instance of this script is running on my pc
-        // then it is my player, and I can move it
-        if(photonView.IsMine)
-        {
-            Move();
-            if (Input.GetKeyDown(KeyCode.Space))
-                TryJump();
-
-            if(hatObject.activeInHierarchy)
-            {
-                currentHatTime += Time.deltaTime;
-            }
-            
-        }
-       
     }
 
     void Move()
@@ -120,19 +99,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
         }
-    }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if(stream.IsWriting)
-        {
-            stream.SendNext(currentHatTime);
-        }
-        if(stream.IsReading)
-        {
-            currentHatTime = (float)stream.ReceiveNext();
-        }
-
     }
 
 
