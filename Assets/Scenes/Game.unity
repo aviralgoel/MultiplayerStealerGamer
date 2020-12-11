@@ -708,6 +708,7 @@ GameObject:
   m_Component:
   - component: {fileID: 340562815}
   - component: {fileID: 340562814}
+  - component: {fileID: 340562816}
   - component: {fileID: 340562813}
   m_Layer: 0
   m_Name: _GameManager
@@ -776,6 +777,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &340562816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340562812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ebe14e9e62284d4994dd8d27f82e323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerContainers:
+  - obj: {fileID: 1342635644}
+    nameText: {fileID: 652835211}
+    hatTimeSlider: {fileID: 36357507}
+  - obj: {fileID: 1674370311}
+    nameText: {fileID: 585362496}
+    hatTimeSlider: {fileID: 1300243373}
+  - obj: {fileID: 267620140}
+    nameText: {fileID: 1092013183}
+    hatTimeSlider: {fileID: 1661902403}
+  - obj: {fileID: 640520796}
+    nameText: {fileID: 1884632699}
+    hatTimeSlider: {fileID: 1294353619}
+  winText: {fileID: 871888677}
 --- !u!1 &361507181
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384,7 +1411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &871888676
 RectTransform:
   m_ObjectHideFlags: 0
